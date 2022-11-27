@@ -1,15 +1,13 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
-import { ALL_CHARACTERS } from "../../apollo/characters";
+import React, { FC } from "react";
 import { Box } from "@mui/material";
 import CharCard from "../CharCard/CharCard";
+import { useAppContext } from "../../context";
 
 const CharList = () => {
-  const { loading, data } = useQuery(ALL_CHARACTERS);
-
-  if(loading) {
-    return <h1>Loading...</h1>
-  }
+  // if(loading) {
+  //   return <h1>Loading...</h1>
+  // }
+  const { characters } = useAppContext();
 
   return (
     <Box
@@ -22,7 +20,7 @@ const CharList = () => {
         overflow: "scroll",
       }}
     >
-      {data?.characters.results.map((char: any) => (
+      {characters.map((char) => (
         <CharCard key={char.id} character={char} />
       ))}
     </Box>
