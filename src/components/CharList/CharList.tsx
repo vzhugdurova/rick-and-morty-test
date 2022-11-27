@@ -1,12 +1,9 @@
 import React, { FC } from "react";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import CharCard from "../CharCard/CharCard";
 import { useAppContext } from "../../context";
 
-const CharList = () => {
-  // if(loading) {
-  //   return <h1>Loading...</h1>
-  // }
+const CharList = ({ loading }: { loading: boolean }) => {
   const { characters } = useAppContext();
 
   return (
@@ -14,15 +11,24 @@ const CharList = () => {
       sx={{
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "space-between",
+        justifyContent: "center",
         gap: 3,
         height: 460 + "px",
         overflow: "scroll",
       }}
     >
-      {characters.map((char) => (
-        <CharCard key={char.id} character={char} />
-      ))}
+      {loading
+        ? Array(8)
+            .fill(1)
+            .map((_, i) => (
+              <Skeleton
+                key={i}
+                variant="rectangular"
+                width={190}
+                height={220}
+              />
+            ))
+        : characters.map((char) => <CharCard key={char.id} character={char} />)}
     </Box>
   );
 };
