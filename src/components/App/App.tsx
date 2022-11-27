@@ -9,9 +9,18 @@ import "./App.css";
 import { Character } from "../../__generated__/graphql";
 import { AppContext } from "../../context";
 
+export type PartyCharacter = {
+  rick: Character | null;
+  morty: Character | null;
+};
+
 const App = () => {
   const { data, loading, refetch } = useQuery(GET_CHARACTER);
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [rickAndMorty, setRickAndMorty] = useState<PartyCharacter>({
+    rick: null,
+    morty: null,
+  });
 
   useEffect(() => {
     if (data?.characters?.results) {
@@ -20,7 +29,9 @@ const App = () => {
   }, [data]);
 
   return (
-    <AppContext.Provider value={{characters, setCharacters}} >
+    <AppContext.Provider
+      value={{ characters, setCharacters, rickAndMorty, setRickAndMorty }}
+    >
       <Container
         maxWidth="md"
         sx={{
@@ -33,7 +44,7 @@ const App = () => {
         }}
       >
         <SearchInput refetch={refetch} />
-        <CharList />
+        <CharList loading={loading} />
         <PartyBox />
       </Container>
     </AppContext.Provider>

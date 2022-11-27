@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { IconButton, Skeleton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FC } from "react";
 import CardWrapper from "../CardWrapper/CardWrapper";
@@ -10,10 +10,19 @@ interface ICardProps {
 }
 
 const CharCard: FC<ICardProps> = ({ character }) => {
-  const { setCharacters } = useAppContext();
-  
+  const { setCharacters, setRickAndMorty } = useAppContext();
+
   function deleteCharacter() {
     setCharacters((prev) => prev.filter((el) => el.id !== character.id));
+  }
+
+  function addToParty() {
+    if (character.name.toLowerCase().match("rick")) {
+      setRickAndMorty((prev) => ({ ...prev, rick: character }));
+    }
+    if (character.name.toLowerCase().match("morty")) {
+      setRickAndMorty((prev) => ({ ...prev, morty: character }));
+    }
   }
 
   return (
@@ -35,6 +44,7 @@ const CharCard: FC<ICardProps> = ({ character }) => {
           src={character.image}
           alt={character.name}
           style={{ width: "100%", height: "100%" }}
+          onClick={() => addToParty()}
         />
       </>
     </CardWrapper>

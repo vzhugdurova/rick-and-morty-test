@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Card } from "@mui/material";
 
 interface ICardWrapper {
@@ -17,6 +17,7 @@ const CardWrapper: FC<ICardWrapper> = ({ children }) => {
         backgroundColor: "#dadada",
         justifyContent: "center",
         alignItems: "flex-end",
+        cursor: "pointer"
       }}
     >
       {children}
