@@ -1,8 +1,8 @@
-import gql from "graphql-tag";
+import { gql } from '../__generated__/gql';
 
-export const ALL_CHARACTERS = gql`
-  query AllCharacters {
-    characters {
+export const GET_CHARACTER = gql(/* GraphQL */`
+  query GetCharacter($name: String) {
+    characters(filter: { name: $name }) {
       results {
         id
         name
@@ -10,4 +10,4 @@ export const ALL_CHARACTERS = gql`
       }
     }
   }
-`;
+`);
