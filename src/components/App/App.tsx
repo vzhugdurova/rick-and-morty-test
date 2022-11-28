@@ -15,7 +15,7 @@ export type PartyCharacter = {
 };
 
 const App = () => {
-  const { data, loading, refetch } = useQuery(GET_CHARACTER);
+  const { data, loading, refetch, error } = useQuery(GET_CHARACTER);
   const [characters, setCharacters] = useState<Character[]>([]);
   const [rickAndMorty, setRickAndMorty] = useState<PartyCharacter>({
     rick: null,
@@ -28,9 +28,16 @@ const App = () => {
     }
   }, [data]);
 
+  if (error) return <h1>Error...</h1>;
+
   return (
     <AppContext.Provider
-      value={{ characters, setCharacters, rickAndMorty, setRickAndMorty }}
+      value={{
+        characters,
+        setCharacters,
+        rickAndMorty,
+        setRickAndMorty,
+      }}
     >
       <Container
         maxWidth="md"

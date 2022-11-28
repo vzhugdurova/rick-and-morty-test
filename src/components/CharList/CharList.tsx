@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Box, Skeleton } from "@mui/material";
 import CharCard from "../CharCard/CharCard";
 import { useAppContext } from "../../context";

@@ -1,4 +1,4 @@
-import { IconButton, Skeleton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FC } from "react";
 import CardWrapper from "../CardWrapper/CardWrapper";
@@ -29,16 +29,16 @@ const CharCard: FC<ICardProps> = ({ character }) => {
     <CardWrapper>
       <>
         <IconButton
-          aria-label="close"
           style={{
             position: "absolute",
             backgroundColor: "white",
             left: 145,
             top: 10,
+            opacity: "75%",
           }}
           onClick={() => deleteCharacter()}
         >
-          <CloseIcon sx={{ color: "#424242" }} fontSize="small" />
+          <CloseIcon sx={{ color: "black" }} fontSize="small" />
         </IconButton>
         <img
           src={character.image}
